@@ -24,9 +24,11 @@ class TobyspringApplication{
 
 fun main(args: Array<String>) {
 
-    object: AnnotationConfigWebApplicationContext(){
+    object: AnnotationConfigWebApplicationContext( ){
+        @Suppress("INAPPLICABLE_JVM_NAME")
+        @JvmName("myClassLoader")
         override fun setClassLoader(classLoader: ClassLoader) {
-            this.classLoader = classLoader
+            this.classLoader=classLoader
         }
 
         override fun onRefresh() {
@@ -35,5 +37,5 @@ fun main(args: Array<String>) {
                 servletContext.addServlet("dispatcherServlet", DispatcherServlet(this)).addMapping("/*")
             }).start()
         }
-    }.also { it.register(TobyspringApplication::class.java) }
+    }.also { it.register(TobyspringApplication::class.java);it.refresh()}.start()
 }
