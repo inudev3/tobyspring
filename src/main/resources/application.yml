@@ -1,5 +1,6 @@
 contextPath: /app
 server:
   type: tomcat
+port: 9090
 my:
   name: Inu
