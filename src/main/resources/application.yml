@@ -1,0 +1,5 @@
+contextPath: /app
+server:
+  type: tomcat
+my:
+  name: Inu
