@@ -1,6 +1,7 @@
 package com.example.tobyspring.config.autoconfig
 
 import com.example.tobyspring.config.annotation.ConditionalOnMyClass
+import com.example.tobyspring.config.annotation.EnableMyConfigurationProperties
 import com.example.tobyspring.config.annotation.MyAutoConfiguration
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -21,8 +22,7 @@ import org.springframework.util.ClassUtils
 
 @MyAutoConfiguration
 @ConditionalOnMyClass("org.apache.catalina.startup.Tomcat")
-@Import(ServerProperties::class)
-class TomCatWebServerConfig( @Value("\${contextPath}")val value:String){
+class TomCatWebServerConfig{
 
 //    val log= LoggerFactory.getLogger(TomCatWebServerConfig::class.java)
     @Bean("tomcatWebServerFactory")

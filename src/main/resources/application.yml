@@ -1,6 +1,14 @@
-contextPath: /app
+
+
+data:
+  driver-class-name: org.h2.Driver
+  url: "jdbc:h2:mem:"
+  username: sa
+  pw:
+
 server:
+  contextPath: /app
+  port: 9090
   type: tomcat
-port: 9090
 my:
   name: Inu

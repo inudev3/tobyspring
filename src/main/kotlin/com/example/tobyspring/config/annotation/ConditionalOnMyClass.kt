@@ -10,15 +10,16 @@ import org.springframework.util.ClassUtils
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
-@Conditional(MyClassCondition::class)
-annotation class ConditionalOnMyClass(val value:String)
+@Conditional(ConditionalOnMyClass.MyClassCondition::class)
+annotation class ConditionalOnMyClass(val value:String) {
 
-class MyClassCondition:Condition{
-    val log = LoggerFactory.getLogger(MyClassCondition::class.java)
-    override fun matches(context: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {
-        val map = metadata.getAnnotationAttributes(ConditionalOnMyClass::class.java.name)
+    class MyClassCondition : Condition {
+        val log = LoggerFactory.getLogger(MyClassCondition::class.java)
+        override fun matches(context: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {
+            val map = metadata.getAnnotationAttributes(ConditionalOnMyClass::class.java.name)
 
-        val classname = map?.get( ConditionalOnMyClass::class.members.first().name) as? String ?: return false
-        return ClassUtils.isPresent(classname, context.classLoader)
+            val classname = map?.get(ConditionalOnMyClass::class.members.first().name) as? String ?: return false
+            return ClassUtils.isPresent(classname, context.classLoader)
+        }
     }
 }

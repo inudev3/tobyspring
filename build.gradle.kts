@@ -6,7 +6,7 @@ plugins {
 //    id("org.asciidoctor.convert") version "2.2.1"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
-    kotlin("plugin.jpa") version "1.7.22"
+    kotlin("plugin.noarg") version "1.7.22"
 }
 
 group = "com.example"
@@ -28,6 +28,9 @@ extra["snippetsDir"] = file("build/generated-snippets")
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework:spring-jdbc")
+    runtimeOnly("com.h2database:h2")
+
 //    {
 //        exclude(group="org.springframework.boot", module = "spring-boot-starter-tomcat" )
 //    }
@@ -52,11 +55,10 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-//tasks.test {
-//    outputs.dir(snippetsDir)
-//}
+allOpen {
+    annotation("org.springframework.stereotype.Component")
+}
 
-//tasks.asciidoctor {
-//    inputs.dir(snippetsDir)
-//    dependsOn(test)
-//}
+noArg {
+    annotation("org.springframework.stereotype.Component")
+}
